@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { primaryNav } from "@/content/data/nav";
 import { Logo } from "@/components/brand/Logo";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const openButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -38,7 +42,8 @@ export function MobileMenu() {
         Menu
       </button>
 
-      {open ? (
+      {open && mounted
+        ? createPortal(
         <div role="dialog" aria-modal="true" aria-label="Site menu" className="fixed inset-0 z-50 ink-ground flex flex-col">
           <div className="container-outer flex items-center justify-between py-6">
             <Link href="/" aria-label="Unreasonable Progress — home" className="flex items-center" onClick={() => setOpen(false)}>
@@ -74,8 +79,10 @@ export function MobileMenu() {
               Request an invitation →
             </Link>
           </nav>
-        </div>
-      ) : null}
+        </div>,
+            document.body
+          )
+        : null}
     </div>
   );
 }
