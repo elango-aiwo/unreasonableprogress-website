@@ -13,7 +13,7 @@ const staticRoutes = [
   "/founder",
   "/practice",
   "/circle",
-  "/index",
+  "/the-index",
   "/charter",
   "/legal/privacy",
   "/legal/disclaimers",
@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route === "" ? 1 : route.startsWith("/legal") ? 0.3 : 0.8,
     })),
     ...articles.map((article) => ({
-      url: `${BASE_URL}/index/${article.slug}`,
+      url: `${BASE_URL}/the-index/${article.slug}`,
       lastModified: article.date,
       changeFrequency: "monthly" as const,
       priority: 0.7,

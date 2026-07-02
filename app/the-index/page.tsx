@@ -30,7 +30,7 @@ export default function IndexHubPage() {
         <div className="mt-10 grid gap-px border border-g-30 bg-g-30 md:grid-cols-3">
           {articles.map((article) => (
             <Reveal key={article.slug} className="invert-hover flex flex-col gap-4 bg-paper p-8">
-              <Link href={`/index/${article.slug}`} className="flex flex-1 flex-col gap-4">
+              <Link href={`/the-index/${article.slug}`} className="flex flex-1 flex-col gap-4">
                 <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-g-50">
                   {article.date} · {article.readingTime}
                 </p>

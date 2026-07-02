@@ -59,6 +59,6 @@ export function articleJsonLd(input: { title: string; description: string; dateP
     headline: input.title,
     description: input.description,
     datePublished: input.datePublished,
-    url: `https://unreasonableprogress.ai/index/${input.slug}`,
+    url: `https://unreasonableprogress.ai/the-index/${input.slug}`,
   };
 }

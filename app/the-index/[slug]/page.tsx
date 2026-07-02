@@ -49,15 +49,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           __html: JSON.stringify([
             articleJsonLd({ title: article.title, description: article.abstract, datePublished: article.date, slug: article.slug }),
             breadcrumbJsonLd([
-              { name: "The Index & Letters", path: "/index" },
-              { name: article.title, path: `/index/${article.slug}` },
+              { name: "The Index & Letters", path: "/the-index" },
+              { name: article.title, path: `/the-index/${article.slug}` },
             ]),
           ]),
         }}
       />
 
       <Section ground="paper">
-        <Link href="/index" className="link-draw font-mono text-[0.8125rem] uppercase tracking-[0.08em] text-g-50">
+        <Link href="/the-index" className="link-draw font-mono text-[0.8125rem] uppercase tracking-[0.08em] text-g-50">
           ← The Index &amp; Letters
         </Link>
         <p className="mt-8 font-mono text-[0.8125rem] uppercase tracking-[0.08em] text-g-50">
@@ -71,14 +71,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
         <nav className="hairline mt-16 flex justify-between pt-8 font-mono text-[0.8125rem] uppercase tracking-[0.06em]">
           {prev ? (
-            <Link href={`/index/${prev.slug}`} className="link-draw">
+            <Link href={`/the-index/${prev.slug}`} className="link-draw">
               ← {prev.title}
             </Link>
           ) : (
             <span />
           )}
           {next ? (
-            <Link href={`/index/${next.slug}`} className="link-draw">
+            <Link href={`/the-index/${next.slug}`} className="link-draw">
               {next.title} →
             </Link>
           ) : (

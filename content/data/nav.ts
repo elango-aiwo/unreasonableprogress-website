@@ -4,7 +4,7 @@ export const primaryNav = [
   { href: "/wealth", label: "Wealth" },
   { href: "/founder", label: "Founder" },
   { href: "/practice", label: "Practice" },
-  { href: "/index", label: "Index" },
+  { href: "/the-index", label: "Index" },
 ] as const;
 
 export const footerNav = [
