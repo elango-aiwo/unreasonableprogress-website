@@ -1,0 +1,17 @@
+import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
+
+const nextConfig: NextConfig = {
+  pageExtensions: ["ts", "tsx", "mdx"],
+  reactStrictMode: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+  turbopack: {
+    root: process.cwd(),
+  },
+};
+
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);

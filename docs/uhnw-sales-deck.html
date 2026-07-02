@@ -1,0 +1,1016 @@
+<style>
+  :root{
+    --paper:#FAF8F3; --paper-2:#F2EEE4; --ink:#16120C; --ink-2:#211B12;
+    --gold:#A9781F; --gold-bright:#D2A24A; --grey:#6E675B; --grey-2:#938B7B;
+    --hair:rgba(22,18,12,.14); --hair-ink:rgba(255,251,240,.16);
+    --disp:"Archivo","Arial Narrow",Impact,"Helvetica Neue Condensed",system-ui,sans-serif;
+    --sans:system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono","Cascadia Mono",Consolas,"SF Mono",ui-monospace,monospace;
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box}
+  .deck{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;padding:0 0 6rem}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+
+  /* ---- Masthead ---- */
+  .mast{border-bottom:1px solid var(--hair);padding:2.4rem 0 1.6rem}
+  .mast .kick{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+  .mast h1{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:.98;margin:.6rem 0 .5rem;font-size:clamp(30px,6vw,58px);text-transform:uppercase}
+  .mast p{max-width:60ch;color:var(--grey);margin:.4rem 0 0;font-size:15px}
+  .mast .meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--grey-2);text-transform:uppercase;margin-top:1rem}
+
+  /* ---- Act map ---- */
+  .map{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);margin:2rem 0 0}
+  .map div{background:var(--paper);padding:1rem 1.1rem}
+  .map .a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+  .map .t{font-family:var(--disp);font-weight:700;font-size:16px;margin:.35rem 0 .2rem;text-transform:uppercase;letter-spacing:-.01em}
+  .map .j{font-size:12.5px;color:var(--grey)}
+  .map .pg{font-family:var(--mono);font-size:10.5px;color:var(--grey-2);margin-top:.4rem}
+
+  /* ---- Act divider ---- */
+  .act{margin:3.4rem 0 1.4rem;border-top:2px solid var(--ink);padding-top:1rem;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  .act .n{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+  .act h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(22px,4vw,34px);margin:.2rem 0}
+  .act .rng{font-family:var(--mono);font-size:11px;color:var(--grey-2);letter-spacing:.12em}
+
+  /* ---- Slide ---- */
+  .slide{border:1px solid var(--hair);background:var(--paper);margin:1.1rem 0;padding:0;overflow:hidden}
+  .slide .hd{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;border-bottom:1px solid var(--hair);font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey-2)}
+  .slide .hd .pn{color:var(--gold);font-weight:600}
+  .slide .bd{padding:1.7rem 1.4rem 1.5rem}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 .8rem}
+  .slide h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02;margin:0 0 .7rem;font-size:clamp(24px,4.4vw,40px);text-wrap:balance}
+  .slide h3.up{text-transform:uppercase}
+  .slide .lead{font-size:16.5px;max-width:64ch;margin:.4rem 0}
+  .slide .lead.big{font-size:19px}
+  .slide p{max-width:66ch}
+  .slide strong{font-weight:700}
+  .kg{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+
+  /* mono strip */
+  .strip{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.7rem 1rem;margin:1.1rem 0 .2rem;border-left:3px solid var(--gold)}
+  .foot{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--grey-2);margin-top:1rem;text-transform:uppercase}
+
+  /* ledger / code block */
+  pre.ledger{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--paper-2);border:1px solid var(--hair);padding:1rem 1.1rem;overflow-x:auto;margin:1rem 0;white-space:pre;color:var(--ink)}
+  .num-list{list-style:none;padding:0;margin:1rem 0;display:grid;gap:.5rem}
+  .num-list li{display:grid;grid-template-columns:2.2rem 1fr;gap:.7rem;align-items:baseline;font-size:14.5px}
+  .num-list li b{font-family:var(--mono);color:var(--gold);font-size:12px;letter-spacing:.08em}
+
+  /* giant number */
+  .huge{font-family:var(--mono);font-weight:600;font-size:clamp(64px,16vw,150px);line-height:.9;letter-spacing:-.04em;margin:.3rem 0}
+
+  /* two-curve svg */
+  .curve{width:100%;height:auto;display:block;margin:.4rem 0}
+
+  /* grids */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair);margin:1rem 0}
+  .g2>div{background:var(--paper);padding:1.1rem 1.2rem}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin:1rem 0}
+  .g3>div{background:var(--paper);padding:1.1rem 1.1rem}
+  .cell-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+  .cell h4{font-family:var(--disp);font-weight:700;font-size:17px;margin:.1rem 0 .4rem;text-transform:uppercase;letter-spacing:-.01em}
+  .cell p{font-size:13.5px;color:var(--grey);margin:.2rem 0;max-width:none}
+
+  /* data table */
+  table.dt{width:100%;border-collapse:collapse;margin:1rem 0;font-size:13.5px}
+  table.dt th,table.dt td{text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--hair);vertical-align:top}
+  table.dt th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-2);font-weight:600}
+  table.dt td.n{font-family:var(--mono);letter-spacing:.02em;white-space:nowrap}
+  table.dt tr:last-child td{border-bottom:none}
+
+  /* strike-reveal */
+  .reveal{margin:1.1rem 0}
+  .reveal s{color:var(--grey-2);text-decoration-thickness:2px;font-size:19px;font-family:var(--disp);font-weight:600}
+  .reveal .to{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(22px,4vw,32px);margin-top:.3rem;letter-spacing:-.02em}
+
+  /* voice block */
+  .voice{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3vw,26px);line-height:1.4;color:var(--paper);max-width:52ch}
+  .voice + .sig{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);margin-top:1.2rem}
+
+  /* INK slide variant */
+  .slide.ink{background:var(--ink);border-color:var(--ink)}
+  .slide.ink .hd{border-color:var(--hair-ink);color:var(--grey-2)}
+  .slide.ink .hd .pn{color:var(--gold-bright)}
+  .slide.ink h3{color:var(--paper)}
+  .slide.ink .lead,.slide.ink p{color:#DAD2C4}
+  .slide.ink .eyebrow{color:var(--gold-bright)}
+  .slide.ink .kg{color:var(--grey-2)}
+  .slide.ink pre.ledger{background:#0E0B07;border-color:var(--hair-ink);color:#E4DCCC}
+  .slide.ink .strip{background:var(--gold);color:var(--ink);border-left-color:var(--paper)}
+  .slide.ink table.dt th{color:var(--grey-2)}
+  .slide.ink table.dt td{color:#DAD2C4;border-color:var(--hair-ink)}
+  .slide.ink .g2,.slide.ink .g3{background:var(--hair-ink);border-color:var(--hair-ink)}
+  .slide.ink .g2>div,.slide.ink .g3>div{background:var(--ink-2)}
+  .slide.ink .cell p{color:var(--grey-2)}
+  .slide.ink .num-list li{color:#E4DCCC}
+  .slide.ink .foot{color:var(--grey-2)}
+
+  /* presenter note */
+  .note{background:var(--paper-2);border-top:1px solid var(--hair);padding:1rem 1.4rem;font-size:13.5px;color:var(--grey)}
+  .note .lab{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.35rem}
+  .note p{max-width:78ch;margin:0}
+  .slide.ink .note{background:#0E0B07;border-color:var(--hair-ink);color:var(--grey-2)}
+
+  /* seats glyph */
+  .seats{display:flex;gap:6px;flex-wrap:wrap;margin:1rem 0}
+  .seats i{width:22px;height:22px;border:1.5px solid var(--gold);border-radius:50%;display:inline-block}
+  .seats i.on{background:var(--gold);border-color:var(--gold)}
+  .slide.ink .seats i{border-color:var(--gold-bright)}
+  .slide.ink .seats i.on{background:var(--gold-bright);border-color:var(--gold-bright)}
+
+  a{color:inherit}
+  @media(max-width:640px){.g2,.g3{grid-template-columns:1fr}.num-list li{grid-template-columns:1.8rem 1fr}}
+  @media print{
+    .deck{padding:0}
+    .slide,.map{break-inside:avoid;page-break-inside:avoid}
+    .act{break-before:page}
+    .note{break-inside:avoid}
+  }
+</style>
+
+<div class="deck">
+<div class="wrap">
+
+  <div class="mast">
+    <div class="kick">The UHNW Sales Deck · 60 Pages · Page-Wise Content</div>
+    <h1>Add decades.<br>Multiply everything.</h1>
+    <p>A private presentation for the H1 client class — Ultra High Net Worth Individuals of ₹1,000 crore and above. Every figure matches the live site; every forward number is a target range marked&nbsp;†, never a guarantee.</p>
+    <div class="meta">Unreasonable Progress™ · Led exclusively by C. Sivasankaran · Confidential — not for circulation</div>
+  </div>
+
+  <div class="map">
+    <div><div class="a">Act I</div><div class="t">The Opening</div><div class="j">Earn 60 seconds; make the category feel inevitable.</div><div class="pg">Pages 01–10</div></div>
+    <div><div class="a">Act II</div><div class="t">The Founder</div><div class="j">Turn the diligence risk into the credential.</div><div class="pg">Pages 11–18</div></div>
+    <div><div class="a">Act III</div><div class="t">Engine One · Health</div><div class="j">Convert mortality fear into a measured system.</div><div class="pg">Pages 19–28</div></div>
+    <div><div class="a">Act IV</div><div class="t">Engine Two · Wealth</div><div class="j">Make 40 years of judgment legible as a system.</div><div class="pg">Pages 29–40</div></div>
+    <div><div class="a">Act V</div><div class="t">The Practice</div><div class="j">Show the machine: tiers, scorecard, rhythm, Circle.</div><div class="pg">Pages 41–50</div></div>
+    <div><div class="a">Act VI</div><div class="t">Evidence &amp; Objections</div><div class="j">Win the comparison; answer the unasked.</div><div class="pg">Pages 51–55</div></div>
+    <div><div class="a">Act VII</div><div class="t">The Close</div><div class="j">The ask, the gates, the seat.</div><div class="pg">Pages 56–60</div></div>
+  </div>
+
+  <!-- ===================== ACT I ===================== -->
+  <div class="act"><div><div class="n">Act I</div><h2>The Opening</h2></div><div class="rng">Pages 01 — 10</div></div>
+
+  <!-- 1 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 01</span><span>Cover</span></div>
+    <div class="bd">
+      <div class="eyebrow">A private advisory practice · Twelve clients · Led exclusively by C. Sivasankaran</div>
+      <h3 class="up" style="font-size:clamp(30px,7vw,64px)">Add decades.<br>Multiply everything.</h3>
+      <svg class="curve" viewBox="0 0 900 200" preserveAspectRatio="none" aria-label="Two curves from one origin: biological age falling, enterprise value rising">
+        <circle cx="70" cy="150" r="5" fill="#D2A24A"/>
+        <path d="M70 150 C 300 150 520 175 860 188" fill="none" stroke="#8A8272" stroke-width="2.5"/>
+        <path d="M70 150 C 320 150 560 70 860 22" fill="none" stroke="#D2A24A" stroke-width="3"/>
+      </svg>
+      <div class="foot">Prepared privately for [Principal's name] · [Date] · Not for circulation</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Say the name of the person in the room. This deck was prepared for one principal, and the first page proves it. Do not open with pleasantries about the practice — open with their name.</p></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 02</span><span>Confidentiality &amp; how to read this</span></div>
+    <div class="bd">
+      <p class="lead big">Prepared for a single principal and their closest advisor. No public pricing, no client identities, no promises — only target ranges†, published methods, and one founder's record.</p>
+      <ol class="num-list">
+        <li><b>01</b><span>Every number in monospace is sourced and dated.</span></li>
+        <li><b>02</b><span>Every forward figure is a target range — marked †, never a guarantee.</span></li>
+        <li><b>03</b><span>Everything here is verifiable on unreasonableprogress.com — built to be checked, not believed.</span></li>
+      </ol>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Two jobs: signal institutional seriousness before a single claim is made, and pre-arm the client's chief of staff — who will run diligence anyway — with the message that we <em>want</em> to be verified.</p></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 03</span><span>The epigraph</span></div>
+    <div class="bd" style="padding-top:2.4rem;padding-bottom:2.4rem">
+      <p class="voice" style="max-width:60ch">"The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man."</p>
+      <div class="sig">George Bernard Shaw, 1903</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Pause. Let them read it. Most people in this room built ₹1,000 crore by being exactly this man. This page tells them we know who they are.</p></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 04</span><span>The question every principal avoids</span></div>
+    <div class="bd">
+      <h3>You have compounded everything you own — except the one asset that owns everything else.</h3>
+      <p class="lead">Your businesses compound. Your portfolio compounds. Your judgment compounds. <strong>Your healthy years do not. They only spend down.</strong></p>
+      <div class="strip">Every deal you will ever do sits inside the years you have left</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The emotional entry point for the H1 client — typically 50–70, post-build, quietly aware of mortality, watching peers decline. Do not soften it; the register is blunt because Siva's register is blunt.</p></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 05</span><span>What you have already tried</span></div>
+    <div class="bd">
+      <div class="g2">
+        <div class="cell"><div class="cell-lab">Longevity clinics</div><p>Optimise the body — but cannot structure a deal.</p></div>
+        <div class="cell"><div class="cell-lab">Banks</div><p>Structure deals — but let the principal die early at his desk.</p></div>
+        <div class="cell"><div class="cell-lab">Family offices</div><p>Manage the money — not the man.</p></div>
+        <div class="cell" style="background:var(--ink)"><div class="cell-lab" style="color:var(--gold-bright)">Unreasonable Progress</div><p style="color:#EDE6D8;font-weight:600;font-size:15px">Manages the man — and the money follows the man.</p></div>
+      </div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Most H1 prospects have already bought at least one of the first three. Name them without contempt — each holds half a solution; nobody holds both halves. The fourth cell is the entire pitch in one sentence.</p></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 06</span><span>The category</span></div>
+    <div class="bd">
+      <div class="eyebrow">The manifesto</div>
+      <h3>Principal Compounding™</h3>
+      <p class="lead big"><em>(n.)</em> — the discipline of compounding the two assets a principal cannot delegate: <strong>his biology and his judgment-driven wealth.</strong></p>
+      <div class="strip">A category with one practitioner · First-mover naming rights being claimed now</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Read the definition aloud once, slowly. If the client repeats the phrase back at any point in the meeting, the deck is working.</p></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 07</span><span>The insight</span></div>
+    <div class="bd">
+      <div class="eyebrow">The insight</div>
+      <h3>Longevity is a wealth strategy.</h3>
+      <p class="lead">Wealth compounds with time. Judgment compounds with time. The only non-renewable input is the principal's <strong>healthy time</strong>.</p>
+      <div class="reveal"><s>Health is a perk.</s><span class="to">Health is the holding period.</span></div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The intellectual heart of the deck. An H1 promoter understands holding periods better than any doctor does — meet him in his own vocabulary, not medicine's.</p></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 08</span><span>The arithmetic</span></div>
+    <div class="bd">
+      <div class="kg">15 years × 20% compounding</div>
+      <div class="huge">= 15x</div>
+      <p class="lead">A fifteen-year health-span extension, compounding at a modest 20% a year, is worth fifteen times your starting position — <strong>before a single deal is done.†</strong></p>
+      <div class="foot">† Illustrative arithmetic, not a projection. Methodology: unreasonableprogress.com/legal/disclaimers</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Not a medical argument — an arithmetic one; say exactly that. For a client who thinks in IRR, this page often does more than the entire health section.</p></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 09</span><span>One man, two curves</span></div>
+    <div class="bd">
+      <h3 class="up">One man. Two curves. One discipline.</h3>
+      <svg class="curve" viewBox="0 0 900 260" aria-label="Biological age falling from 58 to 49; enterprise value rising from 1x to 12.4x">
+        <circle cx="60" cy="180" r="5" fill="#D2A24A"/>
+        <text x="60" y="215" fill="#8A8272" font-family="Consolas,monospace" font-size="11">ORIGIN: FIRST MEASUREMENT</text>
+        <path d="M60 180 C 320 180 560 205 850 220" fill="none" stroke="#8A8272" stroke-width="2.5"/>
+        <text x="640" y="205" fill="#8A8272" font-family="Consolas,monospace" font-size="12">BIO AGE 58→49 †</text>
+        <path d="M60 180 C 340 180 560 70 850 30" fill="none" stroke="#D2A24A" stroke-width="3"/>
+        <text x="600" y="55" fill="#D2A24A" font-family="Consolas,monospace" font-size="12">ENTERPRISE VALUE 1.0x→12.4x †</text>
+      </svg>
+      <div class="strip">Illustrative trajectory — target ranges, see methodology</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The signature visual of the brand — the same one animating on the homepage. Two lines, one discipline, one origin. If the client remembers one image from today, it is this one.</p></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 10</span><span>Sold together, never unbundled</span></div>
+    <div class="bd">
+      <div class="g2">
+        <div class="cell"><div class="cell-lab">Engine One — Health</div><p style="color:var(--ink);font-size:14.5px">Reverse biological age by a target range of 5–15 years.† 208 biomarkers · Test → Treat → Retest.</p><div class="kg" style="margin-top:.5rem">System: JoySpan™ / AIWO</div></div>
+        <div class="cell"><div class="cell-lab">Engine Two — Wealth</div><p style="color:var(--ink);font-size:14.5px">Engineer a 10x–100x decade trajectory.† Six pillars · One Deal Council.</p><div class="kg" style="margin-top:.5rem">System: The Siva Doctrine™</div></div>
+      </div>
+      <p class="lead big" style="text-align:center;margin-top:1rem"><strong>Sold together. Never unbundled. Measured on one scorecard.</strong></p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Pre-empt "Can I take just the wealth side?" The answer is structural, not commercial — the health engine is the <em>foundation</em> of the wealth promise (the holding period). Unbundling sells a building without its foundation.</p></div>
+  </div>
+
+  <!-- ===================== ACT II ===================== -->
+  <div class="act"><div><div class="n">Act II</div><h2>The Founder</h2></div><div class="rng">Pages 11 — 18</div></div>
+
+  <!-- 11 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 11</span><span>The only advisor of his kind</span></div>
+    <div class="bd">
+      <div class="eyebrow">C. Sivasankaran · Founder &amp; sole principal</div>
+      <h3 class="up">Made a billion. Lost it. Remade himself. Measured it in blood.</h3>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>From here to Page 18, the product is the man. UHNW clients don't buy firms at this altitude — they buy a specific person's judgment. This act exists to survive the diligence their office will run this week.</p></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 12</span><span>The ledger of a life</span></div>
+    <div class="bd">
+      <pre class="ledger">STERLING     Founded and built.
+DISHNET      Price-disruption entry into internet services.
+AIRCEL       Built, scaled — sold in a $1B+ exit.
+BARISTA      Entered, built, exited to Lavazza.
+THE FALL     Bankruptcy. Insolvency. A Supreme Court landmark.
+AIWO         Founded — the comeback, systemised into a platform.
+TODAY        Own biological age reversed. A diamond staked
+             publicly on the benchmark.</pre>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Do not rush the middle line. It is printed in the same ink as the victories — deliberately. The next page explains why.</p></div>
+  </div>
+
+  <!-- 13 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 13</span><span>The fall, in the same ink</span></div>
+    <div class="bd">
+      <h3>We put the hard parts on page one — because you were going to find them anyway.</h3>
+      <p class="lead">Bankruptcy. Insolvency courts. Litigation that reached the Supreme Court of India. Your office will run its checks this week. We provide a full disclosure pack at qualification. <strong>Ask us the hard questions first.</strong></p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>This page wins or loses the engagement. By raising the litigation history ourselves — plainly, no gray-out — the diligence question becomes evidence of confidence, not a landmine. If the client asks a hard question here, welcome it; that is the page doing its job.</p></div>
+  </div>
+
+  <!-- 14 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 14</span><span>The comeback is the credential</span></div>
+    <div class="bd">
+      <p class="voice">"I have made billions, lost billions, and rebuilt. Your consultants have read about cycles; I have survived them."</p>
+      <div class="sig">C. Sivasankaran</div>
+      <p class="lead" style="margin-top:1.2rem">No consulting firm can hire this scar tissue. It is not on any resume they can buy.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>For an H1 promoter who has himself survived a cycle, a raid, or a near-death of the business, this lands as recognition between equals — not as a pitch.</p></div>
+  </div>
+
+  <!-- 15 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 15</span><span>Measured in blood</span></div>
+    <div class="bd">
+      <table class="dt">
+        <tr><td class="n" style="font-size:22px;color:var(--gold);font-weight:600">0.71</td><td>Biological years aged per calendar year — flagship client †</td></tr>
+        <tr><td class="n" style="font-size:22px;font-weight:600">208</td><td>Biomarkers · 16 systems · measured quarterly</td></tr>
+        <tr><td class="n" style="font-size:22px;font-weight:600">1</td><td>Diamond, publicly staked by the founder on beating the benchmark</td></tr>
+      </table>
+      <p class="lead">Siva didn't write a book about longevity. He reversed his own biological age, built AIWO to prove it in blood — not brochures — then staked a diamond, publicly, on his flagship client's benchmark.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The diamond stake is the single most repeatable proof-object in the deck; it converts a medical claim into a wager — a language every promoter respects.</p></div>
+  </div>
+
+  <!-- 16 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 16</span><span>Why only Siva</span></div>
+    <div class="bd">
+      <div class="g3">
+        <div class="cell"><div class="cell-lab">Deals lived</div><p>Not advised — lived. Four decades, a hundred transactions, entries and exits across telecom, coffee, internet, real assets.</p></div>
+        <div class="cell"><div class="cell-lab">Distress survived</div><p>The insolvency courts, the creditor rooms, the reputation storms — expertise no firm can recruit.</p></div>
+        <div class="cell"><div class="cell-lab">Biology reversed</div><p>The only advisor in this category who is himself the measured, published proof of the health engine.</p></div>
+      </div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Three columns, three moats. A McKinsey partner may match column one. Nobody offering advisory services matches all three — this is the "why him, not a firm" answer, compressed.</p></div>
+  </div>
+
+  <!-- 17 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 17</span><span>The operating creed</span></div>
+    <div class="bd" style="padding-top:2rem;padding-bottom:2rem">
+      <p class="voice">"You cannot treat what you don't test."</p>
+      <p class="voice" style="margin-top:1rem">"A dead billionaire compounds nothing."</p>
+      <p class="voice" style="margin-top:1rem">"10x, not 10%."</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>These are the lines clients repeat. Read all three; pause after the second — the bluntest sentence in the deck, and it always gets a reaction. Don't explain them; they explain themselves.</p></div>
+  </div>
+
+  <!-- 18 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 18</span><span>The pitch, in his own voice</span></div>
+    <div class="bd" style="padding-top:2rem">
+      <p class="voice">"I built and sold Aircel. I have done a hundred deals, lost everything once, and rebuilt. Then I learned the hardest lesson: a dead billionaire compounds nothing. So I reversed my own biological age, and built AIWO to prove it in blood, not in brochures. Now I take twelve clients — no more. I will add healthy decades to your life and multiply your family's wealth ten to a hundred times across those decades†, and we will measure both, every quarter, on one page. If you want a consultant, hire McKinsey. If you want unreasonable progress, there is one seat left."</p>
+      <div class="sig">C. Sivasankaran — Founder &amp; sole principal</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>If Siva is in the room, he says this — the slide stays blank behind him but the last line. If not, read it verbatim and attribute it. Never paraphrase this passage.</p></div>
+  </div>
+
+  <!-- ===================== ACT III ===================== -->
+  <div class="act"><div><div class="n">Act III</div><h2>Engine One · Health</h2></div><div class="rng">Pages 19 — 28</div></div>
+
+  <!-- 19 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 19</span><span>Engine One</span></div>
+    <div class="bd">
+      <h3 class="up">The body is the balance sheet.</h3>
+      <p class="lead">Engine One reverses the principal's biological age by a target range of <strong>5–15 years†</strong> — clinician-governed, measured every quarter, proven in trend lines rather than testimonials.</p>
+      <div class="kg" style="margin-top:.8rem">System: JoySpan™ / AIWO · Physician-governed</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Transition line: "Everything so far is philosophy. The next ten pages are machinery." H1 clients trust machinery.</p></div>
+  </div>
+
+  <!-- 20 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 20</span><span>The promise, precisely stated</span></div>
+    <div class="bd">
+      <h3>Add 5–15 healthy, joyful years.†</h3>
+      <p class="lead">Not lifespan alone — <strong>JoySpan™</strong>: the years lived in measured vitality, not merely alive.</p>
+      <ul class="num-list">
+        <li><b>·</b><span><strong>Biological age</strong> vs your chronological age — the headline number.</span></li>
+        <li><b>·</b><span><strong>Organ ages</strong> — heart, brain, liver, kidney, metabolic systems, each aged separately.</span></li>
+        <li><b>·</b><span><strong>JoySpan Score</strong> — one number, tracked year over year.</span></li>
+      </ul>
+      <div class="foot">† Clinician-governed target range under a published methodology. Not a medical guarantee. Individual results vary.</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>State the target-range framing out loud, unprompted. Precision about what is <em>not</em> promised is itself a trust signal at this altitude — their advisors are listening for over-claims.</p></div>
+  </div>
+
+  <!-- 21 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 21</span><span>The closed loop</span></div>
+    <div class="bd">
+      <h3 class="up">Test → Treat → Retest</h3>
+      <div class="kg">One flagship 208-marker draw + three quarterly retests per year</div>
+      <p class="lead" style="margin-top:.8rem">The loop closes: every retest feeds the next protocol. No opinions — trend lines.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Contrast with what they know: an annual "executive check-up" is a photograph; this is a motion picture with a director. The quarterly cadence is also the accountability mechanism — the client sees movement, or sees exactly why not.</p></div>
+  </div>
+
+  <!-- 22 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 22</span><span>The system stack</span></div>
+    <div class="bd">
+      <table class="dt">
+        <thead><tr><th>Layer</th><th>Component</th><th>What you see</th></tr></thead>
+        <tbody>
+          <tr><td>Why / outcome</td><td><strong>JoySpan™</strong></td><td>One JoySpan Score + organ ages, year over year</td></tr>
+          <tr><td>How you live</td><td><strong>LongeVis Matrix</strong> · 11+1 pillars</td><td>One prioritised, livable plan</td></tr>
+          <tr><td>What we measure</td><td><strong>BioMAP</strong> · 208 markers, 16 systems</td><td>7 panels → organ ages → one plan</td></tr>
+          <tr><td>90-day method</td><td><strong>SIIS</strong> cycles</td><td>Quarterly visible progress</td></tr>
+          <tr><td>Daily wrapper</td><td><strong>LifeOS app</strong> + concierge physicians</td><td>Nudges, masterclasses, readiness</td></tr>
+          <tr><td>Immersion</td><td><strong>AIWO Retreats / Healthcation</strong></td><td>The reset weeks</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>This is an operating, existing system — not a plan to build one. AIWO runs it today; Unreasonable Progress packages it at principal grade. "Inherited, not invented" answers the execution-risk question before it is asked.</p></div>
+  </div>
+
+  <!-- 23 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 23</span><span>BioMAP — what 208 markers means</span></div>
+    <div class="bd">
+      <table class="dt" style="max-width:520px">
+        <tr><td class="n" style="font-size:20px;font-weight:600;color:var(--gold)">208</td><td>Biomarkers</td><td class="n" style="font-size:20px;font-weight:600">16</td><td>Body systems</td></tr>
+        <tr><td class="n" style="font-size:20px;font-weight:600">7</td><td>Panels</td><td class="n" style="font-size:20px;font-weight:600">4×</td><td>Per year</td></tr>
+      </table>
+      <p class="lead">Most executive physicals measure 30–40 markers once a year and hand you a PDF. BioMAP measures 208 markers across 16 systems, translates them into organ ages, and compresses everything into <strong>one page and one plan</strong> — because a principal doesn't need more data; he needs one decision.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The closing clause is the sale: "one page and one plan." H1 clients are drowning in reports from existing providers — the compression <em>is</em> the luxury.</p></div>
+  </div>
+
+  <!-- 24 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 24</span><span>The benchmark</span></div>
+    <div class="bd" style="text-align:center">
+      <div class="huge" style="color:var(--gold-bright)">0.71</div>
+      <div class="kg" style="color:var(--grey-2)">Biological years aged per calendar year — flagship client †</div>
+      <p class="lead" style="margin:1rem auto 0">Siva's flagship client ages 0.71 biological years per calendar year. The founder has publicly staked a diamond on beating it.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Let the number sit. Then translate: "For every ten calendar years, this client spends only seven biological ones — a 30% discount on time itself." Time-arbitrage is a frame a promoter instantly values.</p></div>
+  </div>
+
+  <!-- 25 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 25</span><span>Principal-grade · family coverage</span></div>
+    <div class="bd">
+      <h3>Your spouse and your successor are inside the program — not guests of it.</h3>
+      <p class="lead">Every Annual Partnership covers <strong>principal + spouse + successor</strong> as full members of the health engine: their own BioMAP draws, their own organ ages, their own plans.</p>
+      <div class="strip">The real fear is not only the patriarch's arteries — it is the successor's readiness</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>For the H1 promoter with an heir entering the business, this is frequently the page that moves the spouse from neutral to advocate. Present it as protection of the <em>family's</em> compounding, not a perk.</p></div>
+  </div>
+
+  <!-- 26 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 26</span><span>Wherever you are · whatever your board needs</span></div>
+    <div class="bd">
+      <div class="g2">
+        <div class="cell"><div class="cell-lab">Global escort protocol</div><p style="color:var(--ink);font-size:14px">Draws, imaging and specialist reviews arranged wherever you are — home collection pan-India today, partner labs abroad. The program follows the principal; the principal does not follow the program.</p></div>
+        <div class="cell"><div class="cell-lab">Key-person vitality letter</div><p style="color:var(--ink);font-size:14px">An annual, privacy-controlled letter you may choose to share with your board, lenders, or insurers. Key-person risk is a balance-sheet item; now it has a document.</p></div>
+      </div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The Vitality Letter is unique in the market — no longevity clinic produces a board-legible artifact. For a promoter whose lenders price key-person risk into every facility, this is a hard financial instrument, not a wellness feature.</p></div>
+  </div>
+
+  <!-- 27 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 27</span><span>The joy protocol</span></div>
+    <div class="bd">
+      <h3>A longer life must be worth living.</h3>
+      <p class="lead">JoySpan is not only biomarkers. Every quarter, a structured audit of the four joy pillars:</p>
+      <div class="strip">Purpose · Relationships · Adventure · Contribution</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>One page — but don't skip it. Many H1 principals privately fear longevity means "more years of the same grind." This reframes: the practice audits joy with the same discipline as ApoB. Deliver it lightly; it earns disproportionate goodwill.</p></div>
+  </div>
+
+  <!-- 28 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 28</span><span>Guardrails</span></div>
+    <div class="bd">
+      <ul class="num-list">
+        <li><b>·</b><span>All medical decisions <strong>physician-governed</strong> — always.</span></li>
+        <li><b>·</b><span>Data private, <strong>single-channel</strong>, consent before every draw.</span></li>
+        <li><b>·</b><span>Results never shared without the principal's instruction.</span></li>
+        <li><b>·</b><span><strong>No outcome guarantees</strong> — trajectory proof, year over year.</span></li>
+      </ul>
+      <div class="foot">Health data handled under DPDPA on a consent-first basis</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Read all four aloud. At this altitude the guardrails are not fine print — they are features. A UHNW client has more to lose from a data leak than from a slow protocol.</p></div>
+  </div>
+
+  <!-- ===================== ACT IV ===================== -->
+  <div class="act"><div><div class="n">Act IV</div><h2>Engine Two · Wealth</h2></div><div class="rng">Pages 29 — 40</div></div>
+
+  <!-- 29 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 29</span><span>Engine Two</span></div>
+    <div class="bd">
+      <h3 class="up">Judgment, codified.</h3>
+      <p class="lead">Forty years of deal-making — Sterling, Dishnet, Aircel, Barista, the fall, the rebuild — distilled into six pillars one founder personally applies to your decade.</p>
+      <div class="kg" style="margin-top:.8rem">Six pillars · One Deal Council · AI mandatory</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Frame shift: "The health engine buys the time. This engine decides what the time is worth."</p></div>
+  </div>
+
+  <!-- 30 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 30</span><span>The wealth promise, precisely stated</span></div>
+    <div class="bd">
+      <h3>A 10x–100x trajectory over the decade.†</h3>
+      <p class="lead"><strong>10x</strong> is the design floor — structure + AI + partnerships, engineered for ₹1,000 crore+ principals. <strong>100x</strong> is the moonshot ceiling — founders who compound deals across an extended healthy lifespan.</p>
+      <div class="foot">† Aspirational planning target range, not an assured return. Advisory only — clients execute through their own bankers and counsel.</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Say the disclaimer out loud, then the creed line: "10x, not 10% — if a plan is incremental, it is rejected at the Deal Council." Ambition and compliance live on the same page deliberately.</p></div>
+  </div>
+
+  <!-- 31 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 31</span><span>Pillar W1</span></div>
+    <div class="bd">
+      <div class="eyebrow">W1 · Deals &amp; investment structuring</div>
+      <h3>Buy-side and sell-side judgment, at the principal level.</h3>
+      <p class="lead">What to buy, when to sell, how to structure. Entry-pricing discipline — <em>enter early, disrupt on price, exit at premium</em> — the Sterling→Dishnet→Aircel→Barista pattern.</p>
+      <div class="strip">Deliverable: a standing Deal Council — Siva reviews every material transaction before you sign</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The Deal Council is the flagship deliverable of the wealth engine: a second set of eyes that has personally closed a $1B+ exit, on <em>your</em> term sheet, <em>before</em> signature. Losses dodged count — that phrase reappears on the scorecard.</p></div>
+  </div>
+
+  <!-- 32 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 32</span><span>Pillar W2</span></div>
+    <div class="bd">
+      <div class="eyebrow">W2 · AI imposition at scale — mandatory</div>
+      <h3>Every enterprise gets an AI Multiplication Audit.</h3>
+      <p class="lead">A function-by-function 4x–10x multiplier map across sales, service, analysis, content and code — delivered by a small forward-deployed builder squad, not slide-writers.</p>
+      <div class="strip">North metric: revenue per employee · Target 2–5x productivity in flagship functions within 18 months †</div>
+      <p class="lead" style="margin-top:.7rem"><strong>No client may skip this pillar.</strong></p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The one pillar with objectively measurable ROI inside 18 months — which buys credibility for every longer-horizon promise. If the client is AI-skeptical, spend time here; the practice drinks its own medicine (AI agents run its own operations).</p></div>
+  </div>
+
+  <!-- 33 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 33</span><span>Pillar W3</span></div>
+    <div class="bd">
+      <div class="eyebrow">W3 · Partnership architecture</div>
+      <h3>The network itself is a compounding asset.</h3>
+      <p class="lead">Curated, high-trust matchmaking inside and beyond the twelve-client circle: JV design, market-entry alliances, technology licensing, capital partnerships — and the annual invite-only <strong>Unreasonable Circle Summit</strong>.</p>
+      <div class="strip">Every client pays to remain inside the network</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>For the H1 persona this is the quiet crown jewel — entry into billionaire-grade networks is one of their three stated hungers, and the Circle is the mechanism. Foreshadow Page 49; don't spend it all yet.</p></div>
+  </div>
+
+  <!-- 34 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 34</span><span>Pillar W4</span></div>
+    <div class="bd">
+      <div class="eyebrow">W4 · Policy &amp; sovereign access</div>
+      <h3>Access and judgment at principal level — never influence-buying.</h3>
+      <p class="lead">Legitimate, registered, fully compliant government-relations counsel: regulatory strategy, policy advocacy, sovereign-fund and multilateral introductions, incentive navigation, jurisdiction arbitrage.</p>
+      <div class="strip">Registered, disclosed advocacy only → read the Red-Line Charter (Page 54)</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Never use the L-word — in the deck or the room. If the client uses it, correct gently: "We do registered, disclosed advocacy — the red lines are published, versioned, founder-signed." The compliance posture is a selling point to listed-company families.</p></div>
+  </div>
+
+  <!-- 35 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 35</span><span>Pillar W5</span></div>
+    <div class="bd">
+      <div class="eyebrow">W5 · Succession &amp; legacy architecture</div>
+      <h3>Transition, not markets, destroys Indian family wealth.</h3>
+      <p class="lead">Family constitution. Next-generation readiness — paired with the successor's own JoySpan program. Ownership/management separation. Trust and holding structures, built with your own counsel. The 100-year family charter.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>For a first-generation H1 wealth creator, this reframes the engagement from "advice for me" to "architecture for everything I've built." The successor is simultaneously in the health engine — making this pillar inseparable from Engine One.</p></div>
+  </div>
+
+  <!-- 36 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 36</span><span>Pillar W6</span></div>
+    <div class="bd">
+      <div class="eyebrow">W6 · Special situations &amp; resilience — the 2 a.m. line</div>
+      <h3 class="up">When the call comes at 2 a.m., it is answered by someone who has taken that call about his own balance sheet.</h3>
+      <p class="lead">Distress. Restructuring. Creditor negotiation. Reputation storms. Regulatory sieges. Comeback design. Siva's insolvency-and-Supreme-Court journey is lived expertise no consulting firm can hire.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Deliver quietly. Every ₹1,000-crore promoter has had — or fears — the 2 a.m. moment. The pillar they won't ask about in front of their team, and the one that cements decade-long loyalty. Simply confirm the line exists and is answered personally.</p></div>
+  </div>
+
+  <!-- 37 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 37</span><span>Why exactly these six</span></div>
+    <div class="bd">
+      <div class="strip" style="font-size:12.5px">W1 offence · W2 engine · W3 network · W4 runway · W5 continuity · W6 insurance</div>
+      <p class="lead" style="margin-top:1rem">Deals grow the numerator. AI multiplies the operating engine. Partnerships expand surface area. Policy clears the runway. Succession protects across generations. Resilience insures the downside.</p>
+      <p class="lead big"><strong>A complete wealth system — still simple enough for one founder to lead.</strong></p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Answers "why not four? why not ten?" with structure: offence, engine, network, runway, continuity, insurance. Nothing missing, nothing decorative.</p></div>
+  </div>
+
+  <!-- 38 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 38</span><span>The /100 Matrix</span></div>
+    <div class="bd">
+      <p class="lead">Every prospective client and every material transaction is scored on ten questions, 1–10 each:</p>
+      <pre class="ledger">01  Does it compound the decade map — not the quarter?
+02  Is the upside ≥10x the realistic alternative?
+03  Can AI multiply the outcome?
+04  Is it backed by data or a designed experiment?
+05  Can we move fast while fully compliant?
+06  Does it protect the principal's health and JoySpan?
+07  Is it safe, ethical, reputation-positive for both sides?
+08  Does it produce measurable value?
+09  Is it the best use of the principal's ROM?
+10  Does it strengthen the Circle?</pre>
+      <div class="strip">≥70 proceed · 50–69 redesign · &lt;50 decline</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Hand them the printed Matrix card. A scoring system a firm is willing to publish is a firm willing to be held to it. Q09 introduces ROM — Return on Management time, the scarcest-resource metric.</p></div>
+  </div>
+
+  <!-- 39 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 39</span><span>We decline more than we accept</span></div>
+    <div class="bd">
+      <h3>The Matrix is applied to you, too.</h3>
+      <p class="lead">Deals scoring below 50 are declined — including deals the client wants. Clients scoring below 70 are declined — regardless of net worth.</p>
+      <div class="strip">Losses dodged are counted on your scorecard · a declined bad deal is a deliverable</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The scarcity page. It flips the power dynamic honestly: the client is also being evaluated. UHNW principals — surrounded by yes-people and fee-hungry banks — find an advisor who declines things magnetic. Truthful setup for the gates at Page 57.</p></div>
+  </div>
+
+  <!-- 40 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 40</span><span>The ten operating lessons</span></div>
+    <div class="bd">
+      <pre class="ledger">01  10x, not 10% — incremental plans are rejected.
+02  Health enables everything — no unreasonable wealth
+    with a reasonable body.
+03  You cannot treat what you don't test.
+04  ROM over CAGR — every initiative priced in principal-hours.
+05  Data drives decisions — evidence rules opinions.
+06  Speed is a must — velocity is the moat.
+07  AI disrupts everything — adopt or be obsoleted; we lead.
+08  Collective power beats individual genius — the Circle.
+09  Ethically grounded — never unreasonable in integrity.
+10  Build for 100 years — century-long architecture.</pre>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The Doctrine on one page — the operating system the client is buying into. Lesson 08 carries the Tamil proverb if the room is right: <em>"Oor koodi ther iluththaal"</em> — together we pull the chariot.</p></div>
+  </div>
+
+  <!-- ===================== ACT V ===================== -->
+  <div class="act"><div><div class="n">Act V</div><h2>The Practice</h2></div><div class="rng">Pages 41 — 50</div></div>
+
+  <!-- 41 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 41</span><span>The practice</span></div>
+    <div class="bd">
+      <h3 class="up">Twelve clients. One founder. One scorecard.</h3>
+      <p class="lead">Every client is accepted personally by the founder. Every quarter is reviewed personally by the founder. Nothing else in this practice is "exclusively Sivasankaran" — because everything that matters already is.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Act V shows the machine. The client has seen the philosophy, the man, and the engines; now they need to see exactly what they receive, when, and what it is measured against.</p></div>
+  </div>
+
+  <!-- 42 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 42</span><span>Tier 1</span></div>
+    <div class="bd">
+      <div class="eyebrow">01 · The Unreasonable Immersion</div>
+      <h3>7–10 days. One private day with Siva.</h3>
+      <p class="lead">The full 208-marker BioMAP draw. The Healthcation reset — five-star, clinical-grade. The <strong>Wealth X-Ray</strong> — a 360° audit across all six pillars.</p>
+      <div class="strip">Output: your Decade Map — health trajectory and wealth trajectory, on one page</div>
+      <div class="foot">The entry path · also the qualification path — both sides decide after the Immersion</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>For the H1 prospect this is the natural first yes — bounded in time, transformational in output, explicitly mutual: at the end, <em>both</em> sides decide whether to proceed. Low-pressure framing, high-scarcity reality.</p></div>
+  </div>
+
+  <!-- 43 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 43</span><span>The Decade Map</span></div>
+    <div class="bd">
+      <h3>Your next ten years. One page.</h3>
+      <svg class="curve" viewBox="0 0 900 200" aria-label="Decade Map: biological age falling, enterprise value rising, six-pillar ledger beneath">
+        <circle cx="60" cy="130" r="4" fill="#A9781F"/>
+        <path d="M60 130 C 300 130 560 150 850 160" fill="none" stroke="#938B7B" stroke-width="2"/>
+        <path d="M60 130 C 340 130 560 55 850 26" fill="none" stroke="#A9781F" stroke-width="2.5"/>
+        <text x="60" y="185" fill="#938B7B" font-family="Consolas,monospace" font-size="11">SIX-PILLAR ACTION LEDGER · YEAR ONE · EACH LINE SCORED /100</text>
+      </svg>
+      <p class="lead">Left axis: biological age, current → target†. Right axis: enterprise value multiple, baseline → target†. Beneath: the six-pillar action ledger for year one, each line scored /100.</p>
+      <div class="strip">Every Immersion ends with this document on the table, signed by the founder</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Artifacts beat adjectives. Show a redacted, illustrative Decade Map physically if possible. This is what the Tier-1 fee buys — not a report, a map with a founder's signature on it.</p></div>
+  </div>
+
+  <!-- 44 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 44</span><span>Tier 2</span></div>
+    <div class="bd">
+      <div class="eyebrow">02 · The Annual Partnership — cap: 12 clients</div>
+      <h3>The core product. Twelve seats.</h3>
+      <p class="lead">Twelve months. Full JoySpan program — <strong>principal + spouse + successor</strong>. Quarterly private sessions with Siva. Standing Deal Council access. The AI Multiplication Audit. Circle membership. Policy counsel as needed.</p>
+      <div class="seats" aria-label="4 of 12 seats filled">
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="foot">4 of 12 filled · 8 seats remaining (current) · Output: the Unreasonable Scorecard, reviewed together every quarter</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The core product. Twelve seats, published cap, no exceptions. State the real current count — 4 filled, 8 remaining — factually, once. Never manufacture urgency beyond the arithmetic; the cap does the work. Update the ticks to the live number before presenting.</p></div>
+  </div>
+
+  <!-- 45 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 45</span><span>Tier 3</span></div>
+    <div class="bd">
+      <div class="eyebrow">03 · The Decade Compact — cap: 5 families</div>
+      <h3>Skin in the game, for ten years.</h3>
+      <p class="lead">Everything in the Annual Partnership, plus <strong>aligned success economics</strong> — success fees on completed transactions Siva architects, and/or advisory equity in ventures co-created — plus full succession architecture (W5) for the family.</p>
+      <div class="strip">Independent valuation · written consent · disclosed in every engagement letter</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Skin in the game is the message: at Compact level, the practice's wealth is made the same way the client's is — on outcomes. The three compliance terms must be said aloud; they make success economics acceptable to the client's counsel.</p></div>
+  </div>
+
+  <!-- 46 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 46</span><span>The Unreasonable Scorecard</span></div>
+    <div class="bd">
+      <table class="dt">
+        <thead><tr><th>Engine</th><th>Metric</th><th>Cadence</th></tr></thead>
+        <tbody>
+          <tr><td>Health</td><td>Biological age Δ vs chronological</td><td class="n">Annual (trend qtrly)</td></tr>
+          <tr><td>Health</td><td>JoySpan Score · organ ages · VO₂max, ApoB, HbA1c, hs-CRP</td><td class="n">Quarterly</td></tr>
+          <tr><td>Wealth</td><td>Net worth / enterprise value multiple vs baseline</td><td class="n">Annual</td></tr>
+          <tr><td>Wealth</td><td>Revenue-per-employee (AI pillar)</td><td class="n">Quarterly</td></tr>
+          <tr><td>Wealth</td><td>Deals reviewed / executed / <strong>avoided</strong></td><td class="n">Quarterly</td></tr>
+          <tr><td>Wealth</td><td>ROM — principal hours freed</td><td class="n">Quarterly</td></tr>
+          <tr><td>Joint</td><td>Successor readiness index</td><td class="n">Annual</td></tr>
+        </tbody>
+      </table>
+      <p class="lead big"><strong>One scorecard. Two engines. Every quarter. This is the product.</strong></p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Slow down. The scorecard is the physical artifact of the entire brand promise — the contract, the report card, and the marketing in one page. The scorecard, not the brochure, does the selling from year one onward.</p></div>
+  </div>
+
+  <!-- 47 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 47</span><span>The rhythm of engagement</span></div>
+    <div class="bd">
+      <pre class="ledger">QUARTERLY   Private session with Siva · biomarker retest ·
+            scorecard review · one Deal Council
+ANNUALLY    Flagship 208-marker draw · Decade Map refresh ·
+            Circle Summit · Key-Person Vitality Letter
+ALWAYS-ON   LifeOS app · concierge desk · the 2 a.m. line</pre>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The cadence answers "what does this actually feel like?" Four deep touchpoints a year with the founder personally, a machine running continuously underneath, and one line that never closes.</p></div>
+  </div>
+
+  <!-- 48 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 48</span><span>Why the cap exists</span></div>
+    <div class="bd">
+      <div class="kg">12 clients × 4 sessions × 2 days ≈ 96 founder-days / year</div>
+      <h3 style="margin-top:.6rem">The cap is not marketing. It is arithmetic.</h3>
+      <p class="lead">The remaining founder-days go to deals, the Circle, and the Doctrine. The moment the calendar breaks, the product breaks — so the calendar is protected by a published, audited number.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>UHNW clients are professionally suspicious of artificial scarcity. This converts the cap from a sales device into capacity mathematics they can check themselves — which paradoxically makes the scarcity fully credible.</p></div>
+  </div>
+
+  <!-- 49 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 49</span><span>The Unreasonable Circle</span></div>
+    <div class="bd">
+      <h3 class="up">The chariot is pulled together.</h3>
+      <p class="voice" style="font-size:20px">"Oor koodi ther iluththaal" — together we pull the chariot.</p>
+      <p class="lead" style="margin-top:1rem">Membership means: curated matchmaking among twelve verified principals · JV and capital-partnership architecture · the annual <strong>Unreasonable Circle Summit</strong>.</p>
+      <div class="foot">60 seats · Chennai / Dubai · 22 of 60 taken (current)</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>For the H1 persona, the third hunger satisfied — entry into billionaire networks, not as a conference attendee but as one of twelve peers whose presence was individually verified. Emphasise curation over access: everyone passed the same five gates.</p></div>
+  </div>
+
+  <!-- 50 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 50</span><span>Confidentiality as architecture</span></div>
+    <div class="bd">
+      <h3>The rules are the product.</h3>
+      <ul class="num-list">
+        <li><b>·</b><span>NDAs — <strong>both directions</strong>.</span></li>
+        <li><b>·</b><span>A standing <strong>conflict register</strong> across all twelve clients.</span></li>
+        <li><b>·</b><span><strong>Maximum two clients per industry.</strong></span></li>
+        <li><b>·</b><span>Chinese walls between client deal files.</span></li>
+        <li><b>·</b><span>An <strong>expulsion clause</strong> — enforced.</span></li>
+      </ul>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The rules are the product — say the phrase. A network of billionaires is only valuable if its confidentiality is engineered, not promised. The two-per-industry cap also reassures this client that their competitor cannot buy the seat next to them.</p></div>
+  </div>
+
+  <!-- ===================== ACT VI ===================== -->
+  <div class="act"><div><div class="n">Act VI</div><h2>Evidence &amp; Objections</h2></div><div class="rng">Pages 51 — 55</div></div>
+
+  <!-- 51 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 51</span><span>The global scan</span></div>
+    <div class="bd">
+      <h3>We looked for a competitor. There isn't one.</h3>
+      <table class="dt">
+        <thead><tr><th>Who exists worldwide</th><th>What they hold</th><th>What they lack</th></tr></thead>
+        <tbody>
+          <tr><td>Longevity clinics — Fountain Life, Biograph, Human Longevity</td><td>The body</td><td>No wealth counsel</td></tr>
+          <tr><td>CEO advisory — Teneo-class retainers</td><td>The counsel</td><td>No biology</td></tr>
+          <tr><td>Peer networks — TIGER 21, YPO</td><td>The room</td><td>Neither engine</td></tr>
+          <tr><td>Family offices &amp; private banks</td><td>The money</td><td>Health as a concierge <em>perk</em></td></tr>
+        </tbody>
+      </table>
+      <p class="lead"><strong>No established firm anywhere integrates biological-age reversal and wealth multiplication in one founder-led offering. The category is open.</strong></p>
+      <div class="foot">Source: Global Benchmark Scan · July 2026</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>The inversion to stress: private banks treat health as a perk bolted onto money; we treat health as the foundation asset money sits on. That inversion <em>is</em> the category.</p></div>
+  </div>
+
+  <!-- 52 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 52</span><span>What the world's best charge for half</span></div>
+    <div class="bd">
+      <table class="dt">
+        <tbody>
+          <tr><td>Fountain Life APEX</td><td class="n">≈ $21,500 / yr</td><td>health only</td></tr>
+          <tr><td>Human Longevity 100+</td><td class="n">≈ $25,000 program</td><td>health only</td></tr>
+          <tr><td>Goldsmith CEO coaching</td><td class="n">≈ $250,000 / engmt</td><td>behaviour only</td></tr>
+          <tr><td>Diamandis Platinum trip</td><td class="n">≈ $70,000 / 5 days</td><td>experience only · 60 seats</td></tr>
+          <tr><td>Teneo CEO retainer</td><td class="n">up to ≈ $3M / yr</td><td>counsel only</td></tr>
+          <tr><td>TIGER 21 membership</td><td class="n">≈ $33,000 / yr</td><td>peer room only</td></tr>
+        </tbody>
+      </table>
+      <p class="lead">The world's best longevity offering tops out near $21k a year — <em>without</em> a single hour of deal counsel. The world's best CEO retainer reaches $3M — <em>without</em> a single biomarker. <strong>We are the only practice where the two halves compound each other.</strong></p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Anchors value before fees are discussed. Present it not as "we cost more" but "these are the comparables your office will find — note each is half of the mandate."</p></div>
+  </div>
+
+  <!-- 53 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 53</span><span>Why not the alternatives you already have</span></div>
+    <div class="bd">
+      <p class="lead"><strong>"Why not McKinsey?"</strong> — Hire them for strategy decks. They have read about cycles; the founder has survived them. And no firm ties its counsel to your bloodwork.</p>
+      <p class="lead"><strong>"Why not my family office?"</strong> — Keep it. The practice is advisory to <em>you</em>, not a replacement — your bankers and counsel execute everything. We manage the man; they keep managing the money.</p>
+      <p class="lead"><strong>"Why not a clinic + a coach + a bank?"</strong> — You'd own three vendors, three data silos, zero integration. The whole point is one scorecard where each engine compounds the other.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Say the McKinsey line with a smile — it's in the founder's own pitch. The family-office answer is critical for H1: it makes the engagement <em>additive</em>, threatening no existing adviser in the client's orbit (whose sabotage would otherwise be a real deal risk).</p></div>
+  </div>
+
+  <!-- 54 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 54</span><span>The Red-Line Charter</span></div>
+    <div class="bd">
+      <h3>The lines we do not cross — published, versioned, signed.</h3>
+      <ul class="num-list">
+        <li><b>H</b><span><strong>Health:</strong> physician governance · no outcome guarantees · DPDPA single-channel data.</span></li>
+        <li><b>W</b><span><strong>Wealth:</strong> no assured returns · advisory only · Chinese walls · conflict register.</span></li>
+        <li><b>P</b><span><strong>Policy:</strong> registered, disclosed advocacy only · PCA / FCPA / UK Bribery Act · no political funding · grey mandates declined.</span></li>
+        <li><b>E</b><span><strong>Equity &amp; carry:</strong> independent valuation · written consent · disclosed in every engagement letter.</span></li>
+      </ul>
+      <div class="foot">Ratified by the founder · Version 1.0 · Published in full at unreasonableprogress.com/charter</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Most pitches hide compliance in appendices; we give it a full page because at this altitude the compliance posture is itself a selling point — especially for listed-company families. Invite the client's counsel to read the full charter tonight.</p></div>
+  </div>
+
+  <!-- 55 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 55</span><span>The questions UHNW clients actually ask</span></div>
+    <div class="bd">
+      <p class="lead"><strong>"Is 5–15 years a guarantee?"</strong> — No. A clinician-governed target range under a published methodology. Individual results vary.</p>
+      <p class="lead"><strong>"Is 10x–100x assured?"</strong> — No. Advisory only; no assured returns; you execute through your own bankers and counsel.</p>
+      <p class="lead"><strong>"Who sees my data?"</strong> — Single-channel, consent-first, DPDPA-governed. Never shared without your instruction.</p>
+      <p class="lead"><strong>"Can my CEO attend instead of me?"</strong> — No. The principal, or no engagement.</p>
+      <p class="lead"><strong>"What if something happens to Siva?"</strong> — The Doctrine is codified; Decade Compacts are contractually survivable; the founder's own JoySpan program is, literally, business continuity.</p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Answer the key-person question before it's asked if the CFO or counsel is present — it's always their first private concern. The honest, structural answer builds more trust than any deflection.</p></div>
+  </div>
+
+  <!-- ===================== ACT VII ===================== -->
+  <div class="act"><div><div class="n">Act VII</div><h2>The Close</h2></div><div class="rng">Pages 56 — 60</div></div>
+
+  <!-- 56 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 56</span><span>Your first year, concretely</span></div>
+    <div class="bd">
+      <pre class="ledger">DAYS 1–10   The Immersion: 208-marker BioMAP · Healthcation
+            reset · Wealth X-Ray · one private day with Siva
+            → YOUR DECADE MAP
+QUARTER 1   First retest · first Deal Council · AI Audit begins
+QUARTER 2   Second session · scorecard v1 · first Circle intros
+QUARTER 3   Third session · AI sprint results measured (rev/employee)
+QUARTER 4   Flagship annual draw · Decade Map refresh · Circle
+            Summit · Vitality Letter · YEAR-ONE SCORECARD</pre>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Concreteness closes. This converts everything before it into a calendar the client can picture themselves inside. End on the last line: "Twelve months from the first blood draw, there is a one-page scorecard on the table that says exactly what happened."</p></div>
+  </div>
+
+  <!-- 57 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 57</span><span>Selection — the five gates</span></div>
+    <div class="bd">
+      <pre class="ledger">1  NET-WORTH GATE   Verified ₹1,000 cr+ (this room) ·
+                    ₹10,000 cr+ families · $1B+
+2  CHEMISTRY GATE   Siva personally accepts every client.
+                    No delegation.
+3  COMMITMENT GATE  The principal — not a deputy — commits to
+                    the full Test→Treat→Retest cadence.
+4  INTEGRITY GATE   A reputation we can stand beside publicly.
+5  /100 GATE        ≥70 on the Client Selection Matrix.</pre>
+      <p class="lead"><strong>All five. No exceptions. Both sides decide after the Immersion.</strong></p>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Presented late deliberately — by now the client wants the seat, and learning there are gates <em>increases</em> the wanting. Deliver factually, without theatre. Gate 3 matters most for H1: the principal himself, not his CEO, not his son.</p></div>
+  </div>
+
+  <!-- 58 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 58</span><span>Fees &amp; economics, philosophically</span></div>
+    <div class="bd">
+      <h3>Fees are disclosed upon qualification — in this room, not in documents.</h3>
+      <ul class="num-list">
+        <li><b>·</b><span>Three tiers. Two published caps — <strong>12 clients · 5 families</strong>.</span></li>
+        <li><b>·</b><span>Compact-level success economics carry independent valuation, written consent, full disclosure in every engagement letter.</span></li>
+        <li><b>·</b><span>The comparables your office will find are on Page 52 — each is half of this mandate.</span></li>
+        <li><b>·</b><span>The scorecard, not the fee, is how this practice expects to be judged in twelve months.</span></li>
+      </ul>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>State fees verbally now if the prospect has passed Gate 1 verification; otherwise schedule the qualification conversation. Anchor against Page 52 (Teneo $3M for counsel alone) and close with the Goldsmith principle: at Compact level, we are paid the way you are — on outcomes.</p></div>
+  </div>
+
+  <!-- 59 -->
+  <div class="slide">
+    <div class="hd"><span class="pn">Page 59</span><span>The ask</span></div>
+    <div class="bd">
+      <h3 class="up">Request an invitation.</h3>
+      <pre class="ledger">1  TODAY         Your questions — especially the hard ones.
+2  THIS WEEK     Qualification &amp; verification · full disclosure
+                 pack provided · your office runs its diligence.
+3  ON ACCEPTANCE Immersion dates reserved — 7–10 days, around you.
+4  AFTER         Both sides decide. Every request answered
+                 personally. Typical response: within 14 days.</pre>
+      <div class="strip">Not all requests receive an invitation.</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>One CTA in the entire deck, same as the website. No urgency banners, no expiring offers — the caps are the only scarcity, and they are real. Hand over the printed Decade Map sample and the /100 Matrix card as the physical leave-behinds.</p></div>
+  </div>
+
+  <!-- 60 -->
+  <div class="slide ink">
+    <div class="hd"><span class="pn">Page 60</span><span>Close</span></div>
+    <div class="bd" style="text-align:center;padding-top:2rem;padding-bottom:2.2rem">
+      <div class="seats" style="justify-content:center" aria-label="Twelve seats, some filled">
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <h3 class="up" style="margin-top:1rem">Twelve seats. No exceptions.</h3>
+      <p class="voice" style="margin:1rem auto 0">"If you want a consultant, hire McKinsey. If you want unreasonable progress, there is one seat left."</p>
+      <h3 class="up" style="margin-top:1.4rem;font-size:clamp(22px,4.6vw,38px)">Add decades. Multiply everything.</h3>
+      <div class="foot" style="color:var(--gold-bright)">unreasonableprogress.com · Chennai · Dubai · Singapore</div>
+    </div>
+    <div class="note"><span class="lab">Presenter</span><p>Close the laptop after this slide. The last thing the client sees is the circle of twelve ticks — some filled, one possibly theirs. Say nothing after the brand line. Let them speak first.</p></div>
+  </div>
+
+  <!-- ===================== APPENDIX ===================== -->
+  <div class="act"><div><div class="n">Appendix</div><h2>For the presenting team</h2></div><div class="rng">Not client-facing</div></div>
+
+  <div class="slide">
+    <div class="hd"><span class="pn">A1</span><span>Compliance checklist before any presentation</span></div>
+    <div class="bd">
+      <ul class="num-list">
+        <li><b>☐</b><span>Every 5–15 / 10x–100x / 0.71 figure on-screen carries † or spoken target-range framing.</span></li>
+        <li><b>☐</b><span>No use of: guarantee(d), assured, promised returns, cure, risk-free, "best in the world", or the L-word.</span></li>
+        <li><b>☐</b><span>Seat counts (Pages 44, 49, 60) updated to the real current numbers — never inflated. Live source: <code>content/data/seats.ts</code> (currently 4/12 · 1/5 · 22/60).</span></li>
+        <li><b>☐</b><span>Client name and date personalised on Page 1; deck destroyed or retrieved if the meeting is cancelled.</span></li>
+        <li><b>☐</b><span>Fee figures never printed; delivered verbally post-Gate-1 verification only.</span></li>
+        <li><b>☐</b><span>Physical leave-behinds prepared: /100 Matrix card, illustrative Decade Map, Red-Line Charter print.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="hd"><span class="pn">A2</span><span>Adaptation notes by sub-persona</span></div>
+    <div class="bd">
+      <table class="dt">
+        <thead><tr><th>Sub-persona</th><th>Where to lean</th></tr></thead>
+        <tbody>
+          <tr><td>Promoter, 50–70, health-anxious</td><td>Lean harder on Act III; move Page 24 (0.71) earlier if attention is short.</td></tr>
+          <tr><td>Post-liquidity founder, 45–60</td><td>Lead with Act IV; W2 (AI) and the Circle carry the meeting.</td></tr>
+          <tr><td>Client with successor present</td><td>Pages 25, 35, 46 (successor-readiness row) become the spine.</td></tr>
+          <tr><td>Counsel / CFO in the room</td><td>Slow down on Pages 28, 45, 54, 55 — the guardrail pages are for them.</td></tr>
+        </tbody>
+      </table>
+      <div class="foot">Source integrity: all copy derived from 01_Unified_Strategic_Document, 02_Global_Benchmark_Scan, 03_Validation_POV, the AIWO Framework Booklet, and the live site content dictionaries (content/copy/*). Where the deck states a number, the website states the same number.</div>
+    </div>
+  </div>
+
+</div>
+</div>

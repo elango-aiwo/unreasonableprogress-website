@@ -1,0 +1,74 @@
+/*
+  UNREASONABLE PROGRESS™ — Design Tokens
+  Source of truth: UNREASONABLE_PROGRESS_Website_Master_Spec.md §4
+  Deviation (ratified, see docs/DECISIONS.md): one signature accent — "Signal Gold" —
+  layered on the spec's locked monochrome system. Everything else is strict grayscale.
+*/
+
+:root {
+  /* ---------- Ground & ink ---------- */
+  --paper: #ffffff; /* pure white — primary ground */
+  --paper-warm: #f7f7f5; /* section alternate, cards on white */
+  --ink: #0a0a0a; /* near-black — primary ink & inverted ground */
+  --ink-soft: #1a1a1a; /* inverted-section card surface */
+
+  /* ---------- Grayscale ramp (hierarchy, rules, disabled) ---------- */
+  --g-90: #262626; /* body text on paper */
+  --g-70: #525252; /* secondary text */
+  --g-50: #8a8a8a; /* captions, eyebrows */
+  --g-30: #c9c9c9; /* hairlines on paper */
+  --g-15: #e8e8e8; /* subtle fills */
+  --g-inv-70: #b8b8b8; /* secondary text on ink */
+  --g-inv-30: #3d3d3d; /* hairlines on ink */
+
+  /* ---------- Signal Gold — the one signature accent (ratified deviation) ---------- */
+  --accent: #b8863a; /* primary accent — CTAs, wealth curve, key numerals */
+  --accent-ink: #8a6423; /* deepened, for accent text on paper (AA contrast) */
+  --accent-soft: #f2e8d8; /* tint — subtle fills, hover backgrounds on paper */
+  --accent-on-ink: #d9ac63; /* brightened accent for use on ink ground */
+
+  /* ---------- Functional only — form validation; never decorative ---------- */
+  --state-valid: var(--ink); /* validity shown by weight/check glyph, not color */
+  --state-error: #b42318; /* the ONLY non-accent hue in the system; form errors only */
+
+  --focus-ring: var(--ink); /* 2px offset ring on paper; paper ring on ink */
+
+  /* ---------- Type scale (fluid, desktop -> mobile) ---------- */
+  --fs-hero: clamp(3rem, 8.5vw, 8.5rem);
+  --fs-h1: clamp(2.4rem, 5.5vw, 4.5rem);
+  --fs-h2: clamp(1.8rem, 3.5vw, 2.75rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --fs-body-lg: clamp(1.125rem, 1.4vw, 1.3125rem);
+  --fs-body: 1rem;
+  --fs-mono: 0.9375rem;
+  --fs-eyebrow: 0.8125rem;
+  --fs-quote: clamp(1.5rem, 2.6vw, 2.25rem);
+
+  /* ---------- Layout ---------- */
+  --grid-max: 1360px;
+  --gutter: 24px;
+  --gutter-mobile: 20px;
+  --outer-margin: clamp(20px, 5vw, 96px);
+  --section-pad: clamp(96px, 14vh, 200px);
+  --space-1: 8px;
+
+  /* ---------- Motion ---------- */
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-hover: 250ms;
+  --dur-underline: 200ms;
+  --dur-reveal: 600ms;
+  --dur-counter: 1200ms;
+  --dur-dualcounter: 2400ms;
+  --stagger: 60ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-hover: 1ms;
+    --dur-underline: 1ms;
+    --dur-reveal: 1ms;
+    --dur-counter: 1ms;
+    --dur-dualcounter: 1ms;
+    --stagger: 0ms;
+  }
+}

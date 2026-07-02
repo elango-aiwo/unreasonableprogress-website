@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Colors */
+  --color-paper: var(--paper);
+  --color-paper-warm: var(--paper-warm);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-g-90: var(--g-90);
+  --color-g-70: var(--g-70);
+  --color-g-50: var(--g-50);
+  --color-g-30: var(--g-30);
+  --color-g-15: var(--g-15);
+  --color-g-inv-70: var(--g-inv-70);
+  --color-g-inv-30: var(--g-inv-30);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-on-ink: var(--accent-on-ink);
+  --color-state-error: var(--state-error);
+
+  /* Fonts (variables set by next/font in app/layout.tsx) */
+  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-text: var(--font-instrument-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-voice: var(--font-newsreader), Georgia, serif;
+
+  /* Type scale */
+  --text-hero: var(--fs-hero);
+  --text-h1: var(--fs-h1);
+  --text-h2: var(--fs-h2);
+  --text-h3: var(--fs-h3);
+  --text-body-lg: var(--fs-body-lg);
+  --text-mono-base: var(--fs-mono);
+  --text-eyebrow: var(--fs-eyebrow);
+  --text-quote: var(--fs-quote);
+
+  /* Radius: documents have corners */
+  --radius-none: 0px;
+
+  --container-grid: var(--grid-max);
+}
+
+@layer base {
+  * {
+    border-color: var(--g-30);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--g-90);
+    font-family: var(--font-text);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* Radius is 0 everywhere except form inputs (2px) — §4.3 */
+  input,
+  textarea,
+  select,
+  button {
+    border-radius: 0;
+  }
+  input,
+  textarea,
+  select {
+    border-radius: 2px;
+  }
+
+  /* box-shadow is banned except the sticky-nav-on-scroll treatment (applied via .nav-scrolled) */
+  * {
+    box-shadow: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .ink-ground :focus-visible {
+    outline-color: var(--paper);
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .ink-ground ::selection {
+    background: var(--paper);
+    color: var(--ink);
+  }
+}
+
+@layer utilities {
+  .ink-ground {
+    background: var(--ink);
+    color: var(--g-inv-70);
+  }
+  .ink-ground h1,
+  .ink-ground h2,
+  .ink-ground h3,
+  .ink-ground h4 {
+    color: var(--paper);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-text {
+    font-family: var(--font-text);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .font-voice {
+    font-family: var(--font-voice);
+    font-style: italic;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--g-50);
+  }
+  .ink-ground .eyebrow {
+    color: var(--g-inv-70);
+  }
+
+  .hairline {
+    border-top: 1px solid var(--g-30);
+  }
+  .ink-ground .hairline {
+    border-top-color: var(--g-inv-30);
+  }
+
+  .measure {
+    max-width: 68ch;
+  }
+
+  .container-outer {
+    width: 100%;
+    max-width: var(--grid-max);
+    margin-inline: auto;
+    padding-inline: var(--outer-margin);
+  }
+
+  .section-pad {
+    padding-block: var(--section-pad);
+  }
+
+  /* Signature hover: link underline draws left -> right */
+  .link-draw {
+    position: relative;
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0% 1px;
+    transition: background-size var(--dur-underline) ease;
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Signature hover: ground inversion on cards */
+  .invert-hover {
+    transition:
+      background-color var(--dur-hover) ease,
+      color var(--dur-hover) ease,
+      border-color var(--dur-hover) ease;
+  }
+  .invert-hover:hover,
+  .invert-hover:focus-within {
+    background: var(--ink);
+    color: var(--g-inv-70);
+    border-color: var(--g-inv-30);
+  }
+  .invert-hover:hover h1,
+  .invert-hover:hover h2,
+  .invert-hover:hover h3,
+  .invert-hover:hover h4,
+  .invert-hover:focus-within h1,
+  .invert-hover:focus-within h2,
+  .invert-hover:focus-within h3,
+  .invert-hover:focus-within h4 {
+    color: var(--paper);
+  }
+
+  .tracks-out {
+    transition: letter-spacing var(--dur-hover) ease;
+  }
+  .tracks-out:hover,
+  .tracks-out:focus-visible {
+    letter-spacing: 0.02em;
+  }
+
+  .nav-scrolled {
+    box-shadow: 0 1px 0 0 var(--g-30);
+  }
+
+  /* Reveal primitive — toggled by IntersectionObserver in lib/motion.ts */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity var(--dur-reveal) var(--ease-settle),
+      transform var(--dur-reveal) var(--ease-settle);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-rule {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-reveal) var(--ease-settle);
+  }
+  .reveal-rule.is-visible {
+    transform: scaleX(1);
+  }
+
+  /* Strike-Reveal device — §4.2 */
+  .strike-reveal {
+    position: relative;
+    display: inline-block;
+  }
+  .strike-reveal .before {
+    color: var(--g-50);
+    text-decoration: line-through;
+    text-decoration-color: var(--g-50);
+    transition: opacity var(--dur-reveal) ease;
+  }
+  .strike-reveal .after {
+    display: block;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity var(--dur-reveal) var(--ease-settle),
+      transform var(--dur-reveal) var(--ease-settle);
+  }
+  .strike-reveal.is-visible .before {
+    opacity: 0.5;
+  }
+  .strike-reveal.is-visible .after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Infinity mark motion (§ brand-usage) ---------- */
+  /* "draw" — one-shot self-drawing resolve on mount */
+  .mark-draw path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: mark-draw 1400ms var(--ease-settle) forwards;
+  }
+  @keyframes mark-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  /* "trace" — an endless highlight travelling the infinite path (idle life) */
+  .mark-trace path {
+    stroke-dasharray: 18 82;
+    animation: mark-trace 3600ms linear infinite;
+  }
+  @keyframes mark-trace {
+    to {
+      stroke-dashoffset: -100;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark-draw path,
+  .mark-trace path {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

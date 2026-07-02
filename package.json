@@ -1,0 +1,45 @@
+{
+  "name": "unreasonable-progress-website",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run check:copy && next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "check:copy": "node scripts/check-banned-words.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.2.10",
+    "@tailwindcss/postcss": "^4.3.2",
+    "clsx": "^2.1.1",
+    "gsap": "^3.15.0",
+    "motion": "^12.42.2",
+    "next": "^16.2.10",
+    "postcss": "^8.5.16",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hook-form": "^7.80.0",
+    "tailwindcss": "^4.3.2",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.10",
+    "typescript": "^6.0.3"
+  }
+}
