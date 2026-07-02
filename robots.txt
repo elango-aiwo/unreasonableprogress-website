@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://unreasonableprogress.com/sitemap.xml
+Sitemap: https://unreasonableprogress.ai/sitemap.xml
