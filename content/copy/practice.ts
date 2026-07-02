@@ -69,7 +69,7 @@ export const practice = {
     gates: [
       { name: "Net-worth gate", detail: "Verified ₹1,000 cr+ / ₹10,000 cr+ / $1B+." },
       { name: "Chemistry gate", detail: "Siva personally accepts every client. No delegation." },
-      { name: "Commitment gate", detail: "The principal commits to the full Test→Treat→Retest cadence and quarterly sessions." },
+      { name: "Commitment gate", detail: "The principal commits to the full SIIS cadence — Signals → Interpretations → Interventions → Systems — and quarterly sessions." },
       { name: "Integrity gate", detail: "Clean-enough reputation for us to stand beside publicly." },
       { name: "/100 gate", detail: "The client scores ≥70 on the Client Selection Matrix." },
     ],

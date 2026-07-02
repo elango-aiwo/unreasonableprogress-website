@@ -8,7 +8,7 @@ import { Reveal } from "@/components/core/Reveal";
 import { InfinityMark } from "@/components/brand/InfinityMark";
 import { TargetRangeNote } from "@/components/compliance/TargetRangeNote";
 import { MedicalDisclaimer } from "@/components/compliance/MedicalDisclaimer";
-import { LoopDiagram } from "@/components/engines/LoopDiagram";
+import { SiisLoop } from "@/components/engines/SiisLoop";
 import { SystemStack } from "@/components/artifacts/SystemStack";
 import { health } from "@/content/copy/health";
 import { ogMetadata } from "@/lib/og";
@@ -34,7 +34,7 @@ export default function HealthPage() {
       <Section ground="paper-warm">
         <Eyebrow>{health.loop.eyebrow}</Eyebrow>
         <div className="mt-10">
-          <LoopDiagram stations={health.loop.stations} />
+          <SiisLoop stations={health.loop.stations} />
         </div>
         <p className="mt-8 text-center font-mono text-[0.75rem] uppercase tracking-[0.08em] text-g-50">
           {health.loop.cadence}

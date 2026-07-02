@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { primaryNav } from "@/content/data/nav";
-import { Logo } from "@/components/brand/Logo";
+import { LogoStacked } from "@/components/brand/Logo";
 import { MobileMenu } from "@/components/nav/MobileMenu";
 
 /** Radically shallow nav — SPEC §5.2 / reference pattern A6. Sticky, minimal, one CTA. */
@@ -27,7 +27,7 @@ export function Header() {
     >
       <div className="container-outer flex h-20 items-center justify-between">
         <Link href="/" aria-label="Unreasonable Progress — home" className="flex items-center">
-          <Logo size={16} />
+          <LogoStacked size={32} />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

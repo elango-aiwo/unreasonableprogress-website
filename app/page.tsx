@@ -9,7 +9,6 @@ import { CTA } from "@/components/core/CTA";
 import { TickCircle } from "@/components/core/TickCircle";
 import { Reveal } from "@/components/core/Reveal";
 import { StrikeReveal } from "@/components/core/StrikeReveal";
-import { HeroVisual } from "@/components/hero/HeroVisual";
 import { DualCounter } from "@/components/hero/DualCounter";
 import { EngineSplit } from "@/components/engines/EngineSplit";
 import { home, homeMeta } from "@/content/copy/home";
@@ -25,9 +24,6 @@ export default function HomePage() {
     <div>
       {/* H1 — Hero: The Two Curves */}
       <Section ground="paper" noPad className="relative overflow-hidden pb-24 pt-20 md:pt-28">
-        <div className="pointer-events-none absolute inset-0">
-          <HeroVisual />
-        </div>
         <div className="relative">
           <Eyebrow>{home.h1_hero.eyebrow}</Eyebrow>
           <h1 className="mt-6 text-hero font-display font-extrabold">

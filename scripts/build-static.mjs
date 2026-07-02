@@ -10,7 +10,7 @@
  *     the browser instead; the demo apply flow still works end-to-end.
  */
 import { execSync } from "node:child_process";
-import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = join(import.meta.dirname, "..");
@@ -43,6 +43,18 @@ try {
 
   // GitHub Pages serves via Jekyll by default, which drops _next/ — disable it.
   writeFileSync(join(root, "out", ".nojekyll"), "");
+
+  // The GitHub Pages builder rejects $-named RSC prefetch files (e.g. $d$slug/);
+  // pruning them only downgrades article links to full-page navigations.
+  const prune = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const p = join(dir, entry.name);
+      if (entry.name.includes("$")) rmSync(p, { recursive: true, force: true });
+      else if (entry.isDirectory()) prune(p);
+    }
+  };
+  prune(join(root, "out"));
+
   console.log("\nStatic site written to out/");
 } finally {
   restore();
