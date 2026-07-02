@@ -3,7 +3,7 @@ import { articles } from "@/content/data/articles";
 
 export const dynamic = "force-static";
 
-const BASE_URL = "https://unreasonableprogress.com";
+const BASE_URL = "https://unreasonableprogress.ai";
 
 const staticRoutes = [
   "",

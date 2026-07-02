@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
           {title}
         </div>
         <div style={{ display: "flex", fontSize: 20, color: "#B8863A", fontFamily: "monospace" }}>
-          UNREASONABLEPROGRESS.COM
+          UNREASONABLEPROGRESS.AI
         </div>
       </div>
     ),

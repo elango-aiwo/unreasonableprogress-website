@@ -13,7 +13,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://unreasonableprogress.com"),
+  metadataBase: new URL("https://unreasonableprogress.ai"),
   title: {
     default: "Unreasonable Progress — Add decades. Multiply everything.",
     template: "%s — Unreasonable Progress",

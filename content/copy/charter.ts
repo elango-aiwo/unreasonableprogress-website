@@ -47,5 +47,5 @@ export const charter = {
 
   signature: { text: "Ratified by the founder · Version 1.0 · July 2026" },
 
-  concern: { body: "Report a concern", email: "compliance@unreasonableprogress.com" },
+  concern: { body: "Report a concern", email: "compliance@unreasonableprogress.ai" },
 } as const;

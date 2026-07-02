@@ -4,7 +4,7 @@ export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Unreasonable Progress",
-  url: "https://unreasonableprogress.com",
+  url: "https://unreasonableprogress.ai",
   description:
     "An invitation-only advisory practice led exclusively by C. Sivasankaran, compounding a principal's biological age reversal and wealth trajectory on one scorecard.",
   founder: { "@type": "Person", name: "C. Sivasankaran" },
@@ -47,7 +47,7 @@ export function breadcrumbJsonLd(items: readonly { name: string; path: string }[
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `https://unreasonableprogress.com${item.path}`,
+      item: `https://unreasonableprogress.ai${item.path}`,
     })),
   };
 }
@@ -59,6 +59,6 @@ export function articleJsonLd(input: { title: string; description: string; dateP
     headline: input.title,
     description: input.description,
     datePublished: input.datePublished,
-    url: `https://unreasonableprogress.com/index/${input.slug}`,
+    url: `https://unreasonableprogress.ai/index/${input.slug}`,
   };
 }

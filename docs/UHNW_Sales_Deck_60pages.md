@@ -50,7 +50,7 @@ This document is prepared for a single principal and their closest advisor. It c
 **Three reading rules (mono ledger):**
 - `1` Every number in this typeface is sourced and dated.
 - `2` Every forward figure is a target range — marked †, never a guarantee.
-- `3` Everything claimed here is verifiable on unreasonableprogress.com — built to be checked, not believed.
+- `3` Everything claimed here is verifiable on unreasonableprogress.ai — built to be checked, not believed.
 
 **Presenter note:** This page does two jobs: it signals institutional seriousness before a single claim is made, and it pre-arms the client's chief of staff — who will run diligence anyway — with the message that we *want* to be verified.
 
@@ -141,7 +141,7 @@ The only non-renewable input is the principal's **healthy time**.
 
 A fifteen-year health-span extension, compounding at a modest 20% a year, is worth fifteen times your starting position — before any transaction, any restructuring, any exit.
 
-**Footnote (mono, small):** `† ILLUSTRATIVE ARITHMETIC, NOT A PROJECTION. TARGET RANGES AND METHODOLOGY: UNREASONABLEPROGRESS.COM/LEGAL/DISCLAIMERS`
+**Footnote (mono, small):** `† ILLUSTRATIVE ARITHMETIC, NOT A PROJECTION. TARGET RANGES AND METHODOLOGY: unreasonableprogress.ai/LEGAL/DISCLAIMERS`
 
 **Presenter note:** This is not a medical argument, it is an arithmetic one — say exactly that. For a client who thinks in IRR, this single page often does more than the entire health section.
 
@@ -858,7 +858,7 @@ TIGER 21 MEMBERSHIP         ≈ $33,000 / yr      peer room only
 - **Policy:** registered, disclosed advocacy only · PCA / FCPA / UK Bribery Act compliance · no political funding intermediation · grey mandates declined
 - **Equity & carry:** independent valuation · written consent · disclosed in every engagement letter
 
-`RATIFIED BY THE FOUNDER · VERSION 1.0 · PUBLISHED IN FULL AT UNREASONABLEPROGRESS.COM/CHARTER`
+`RATIFIED BY THE FOUNDER · VERSION 1.0 · PUBLISHED IN FULL AT unreasonableprogress.ai/CHARTER`
 
 **Presenter note:** Most pitches hide compliance in appendices; we give it a full page because at this altitude *the compliance posture is itself a selling point* — especially for listed-company families. Invite the client's counsel to read the full charter online tonight.
 
@@ -973,7 +973,7 @@ What we will put in writing today:
 
 ## ADD DECADES. MULTIPLY EVERYTHING.
 
-`UNREASONABLEPROGRESS.COM · CHENNAI · DUBAI · SINGAPORE`
+`unreasonableprogress.ai · CHENNAI · DUBAI · SINGAPORE`
 
 **Presenter note:** Close the laptop after this slide. The last thing the client sees is the circle of twelve ticks — some filled, one of them possibly theirs. Say nothing after the brand line. Let them speak first.
 

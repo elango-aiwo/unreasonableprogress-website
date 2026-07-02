@@ -6,6 +6,6 @@ export const dynamic = "force-static";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://unreasonableprogress.com/sitemap.xml",
+    sitemap: "https://unreasonableprogress.ai/sitemap.xml",
   };
 }
