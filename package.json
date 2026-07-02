@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run check:copy && next build",
+    "build:static": "node scripts/build-static.mjs",
     "start": "next start",
     "lint": "eslint .",
     "check:copy": "node scripts/check-banned-words.mjs"

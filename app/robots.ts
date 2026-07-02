@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 /** SPEC §8.5 — allow all; /apply is noindex via its own page metadata, not disallowed here. */
 export default function robots(): MetadataRoute.Robots {
   return {
